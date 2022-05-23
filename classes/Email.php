@@ -3,6 +3,10 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Dotenv\Dotenv as Dotenv;
+
+$dotenv = Dotenv::createImmutable('../includes/.env');
+$dotenv->safeLoad();
 
 class Email
 {
@@ -22,11 +26,12 @@ class Email
         // Create email object (info from Mailtrap)
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'smtp.mailtrap.io';
+        $mail->Host = $_ENV['MAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = 'c7d110a8852d59';
-        $mail->Password = '6951d42b29b4ab';
+        $mail->Username = $_ENV['MAIL_USER'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = $_ENV['MAIL_PORT'];
 
         $mail->setFrom('info@appsalon.com');
         $mail->addAddress('info@appsalon.com', 'AppSalon.com');
@@ -38,7 +43,8 @@ class Email
 
         $content = "<html>";
         $content .= "<p><strong>Hello " . $this->name . "</strong>we need you to confirm your account before creating it:</p>";
-        $content .= "<p><a href='https://rbm-appsalon.herokuapp.com/confirm-account?token=" . $this->token . "'>Confirm Account</a></p>";
+        $content .=
+            "<p>Click here: <a href='" . $_ENV['SERVER_HOST'] . "confirm-account?token=" . $this->token . "'>Confirm Account </a> </p>";
         $content .= "<p>If you didn't register at AppSalon, you may ignore this message</p>";
         $content .= "</html>";
 
@@ -53,11 +59,12 @@ class Email
         // Create email object (info from Mailtrap)
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'smtp.mailtrap.io';
+        $mail->Host = $_ENV['MAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = 'c7d110a8852d59';
-        $mail->Password = '6951d42b29b4ab';
+        $mail->Username = $_ENV['MAIL_USER'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = $_ENV['MAIL_PORT'];
 
         $mail->setFrom('info@appsalon.com');
         $mail->addAddress('info@appsalon.com', 'AppSalon.com');
@@ -69,7 +76,8 @@ class Email
 
         $content = "<html>";
         $content .= "<p><strong>Hello " . $this->name . "</strong> You've requested to reset your password, click on the following link to proceed.</p>";
-        $content .= "<p><a href='https://rbm-appsalon.herokuapp.com/reset?token=" . $this->token . "'>Reset Password</a></p>";
+        $content .=
+            "<p><a href='" . $_ENV['SERVER_HOST'] . "reset?token=" . $this->token . "'>Reset Password</a> </p>";
         $content .= "<p>If you didn't register at AppSalon, you may ignore this message</p>";
         $content .= "</html>";
 

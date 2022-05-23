@@ -38,7 +38,7 @@ class Email
 
         $content = "<html>";
         $content .= "<p><strong>Hello " . $this->name . "</strong>we need you to confirm your account before creating it:</p>";
-        $content .= "<p><a href='http://localhost:3000/confirm-account?token=" . $this->token . "'>Confirm Account</a></p>";
+        $content .= "<p><a href='https://rbm-appsalon.herokuapp.com/confirm-account?token=" . $this->token . "'>Confirm Account</a></p>";
         $content .= "<p>If you didn't register at AppSalon, you may ignore this message</p>";
         $content .= "</html>";
 
@@ -69,7 +69,7 @@ class Email
 
         $content = "<html>";
         $content .= "<p><strong>Hello " . $this->name . "</strong> You've requested to reset your password, click on the following link to proceed.</p>";
-        $content .= "<p><a href='http://localhost:3000/reset?token=" . $this->token . "'>Reset Password</a></p>";
+        $content .= "<p><a href='https://rbm-appsalon.herokuapp.com/reset?token=" . $this->token . "'>Reset Password</a></p>";
         $content .= "<p>If you didn't register at AppSalon, you may ignore this message</p>";
         $content .= "</html>";
 
